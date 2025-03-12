@@ -121,6 +121,7 @@ function App() {
           enableColumnDragging={false}
           enableDensityToggle={false}
           enableGlobalFilter={false}
+          enableFullScreenToggle={false}
           manualPagination
           enablePagination={true}
           rowCount={totalRows}
