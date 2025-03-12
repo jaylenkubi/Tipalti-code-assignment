@@ -21,7 +21,6 @@ interface ApiResponse {
   transactions: Transaction[];
 }
 
-// Define theme for Mantine v6
 const theme: MantineThemeOverride = {
   colorScheme: 'light' as const,
   primaryColor: 'blue',
@@ -34,27 +33,22 @@ function App() {
   const [isError, setIsError] = useState(false);
   const [totalRows, setTotalRows] = useState(0);
   
-  // Use a single state object for pagination to ensure consistency
   const [pagination, setPagination] = useState<MRT_PaginationState>({
     pageIndex: 0,
     pageSize: 10,
   });
 
-  // Destructure for convenience
   const { pageIndex, pageSize } = pagination;
 
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
         setIsLoading(true);
-        // Add 1 to pageIndex because API is 1-indexed but table is 0-indexed
         const response = await axios.get<ApiResponse>(
           `https://tip-transactions.vercel.app/api/transactions?page=${pageIndex + 1}&limit=${pageSize}`
         );
         
         setTransactions(response.data.transactions);
-        // Calculate total rows from totalPages and pageSize
-        // This is an approximation if the API doesn't return the exact count
         setTotalRows(response.data.totalPages * pageSize);
         setIsLoading(false);
       } catch (err) {
@@ -65,7 +59,7 @@ function App() {
     };
 
     fetchTransactions();
-  }, [pageIndex, pageSize]); // Re-fetch when pagination changes
+  }, [pageIndex, pageSize]);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
