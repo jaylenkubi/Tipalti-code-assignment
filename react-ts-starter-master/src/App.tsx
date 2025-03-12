@@ -111,7 +111,7 @@ function App() {
   return (
     <MantineProvider theme={theme}>
       <Container size="lg" py="xl">
-        <Title order={1} align="center" mb="xl" style={{ fontSize: '24px' }}>Expenses</Title>
+        <Title order={1} align="center" mb="xl">Expenses</Title>
         
         <MantineReactTable
           columns={columns}
